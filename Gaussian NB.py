@@ -137,33 +137,6 @@ X_train_scaled = scaler.fit_transform(X_train)
 # we must apply the scaling to the test set as well that we are computing for the training set
 X_test_scaled = scaler.transform(X_test)
 
-"""## Classification using Random Forest.
-<hr>
-"""
-
-'''
-max depth and n_estimator are important to fine tune otherwise trees will be densely graphed which will be a classic case of overfitting. max_depth=4 and n_estimators=10 gives pretty much satisfying results by making sure model is able to generalize well.
-'''
-from sklearn.ensemble import RandomForestClassifier
-clf = RandomForestClassifier(max_depth=4,n_estimators=100,random_state=42).fit(X_train, y_train)
-
-print('RF Accuracy on training set: {:.2f}'.format(clf.score(X_train, y_train)))
-print('RF Accuracy on test set: {:.2f}'.format(clf.score(X_test, y_test)))
-
-
-
-"""### <div style="color:blue;"><b> Classification report </b></div>
-
-#### <u>yellowbrick</u> for classification report as they are great for visualizing in a tabular format**
-"""
-
-from yellowbrick.classifier import ClassificationReport
-classes=list(targets.values())
-visualizer = ClassificationReport(clf, classes=classes, support=True,cmap="Blues")
-
-visualizer.fit(X_train, y_train)  # Fit the visualizer and the model
-visualizer.score(X_test, y_test)  # Evaluate the model on the test data
-visualizer.show()
 
 
 """# Gaussian Naive Bayes #"""
